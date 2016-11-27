@@ -1,26 +1,35 @@
 (function () {
 'use strict';
 
-angular.module('DIApp', [])
-.controller('DIController', DIController);
+angular.module('LunchCheck', [])
 
-function DIController ($scope,
-                       $filter,
-                       $injector) {
-  $scope.name = "Yaakov";
+.controller('LunchCheckController', LunchCheckController);
 
-  $scope.upper = function () {
-    var upCase = $filter('uppercase');
-    $scope.name = upCase($scope.name);
+LunchCheckController.$inject = ['$scope'];
+
+function LunchCheckController ($scope){
+  $scope.name = "";
+  $scope.totalValue = 0;
+
+  $scope.displayNumeric = function () {
+    var totalWords = calculateWords($scope.name);
+    $scope.totalValue = totalWords;
+    console.log("BUUUUU"+ $scope.totalValue);
   };
 
-  console.log($injector.annotate(DIController));
-}
+  function calculateWords(string) {
+    var auxList = string.split(",").length;
+    return auxList;
+  };
 
-function AnnonateMe(name, job, blah) {
-  return "Blah!";
-}
+  $scope.sayMessage = function () {
+    console.log($scope.totalValue);
+    if($scope.totalValue <= 3){
+      return "Enjoy your meal";}
+    else {
+      return "Too much !!!";}
+  };
 
-console.log(DIController.toString());
+}
 
 })();
