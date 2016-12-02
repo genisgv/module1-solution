@@ -12,12 +12,12 @@ function LunchCheckController ($scope){
   $scope.totalValue = 0;
 
   $scope.sayMessage = function () {
-    if ($scope.totalValue == 0){
-      return " ";}
-    else if ($scope.totalValue != 0 && $scope.totalValue <= 3) {
-      return "Enjoy your meal";}
+    if ($scope.totalValue <= 0){
+      return "Please enter data first";}
+    else if ($scope.totalValue <= 3) {
+      return "Enjoy!";}
     else if ($scope.totalValue > 3){
-      return "Too much !!!";}
+      return "Too much!";}
   };
 
   $scope.displayNumeric = function () {
@@ -27,8 +27,11 @@ function LunchCheckController ($scope){
   };
 
   function calculateWords(string) {
-    var auxList = string.split(",").length;
-    return auxList;
+    if (string.length ==0){
+      return 0;}
+    else{
+      var auxList = string.split(",").length;
+      return auxList;}
   }
 }
 
